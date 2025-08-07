@@ -27,7 +27,7 @@ export interface ConversionResponse {
   providedIn: 'root'
 })
 export class CurrencyService {
-  private apiUrl = 'https://replit.com/@abdulrafaydevel/TA-Solutions-Backend/api';
+  private apiUrl = 'https://ta-solutions-backend.vercel.app/api';
 
   constructor(private http: HttpClient) { }
 

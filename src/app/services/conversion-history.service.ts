@@ -17,7 +17,7 @@ export interface ConversionHistory {
   providedIn: 'root'
 })
 export class ConversionHistoryService {
-  private apiUrl = 'https://replit.com/@abdulrafaydevel/TA-Solutions-Backend/api';
+  private apiUrl = 'https://ta-solutions-backend.vercel.app/api';
   private conversionsSubject = new BehaviorSubject<ConversionHistory[]>([]);
   public conversions$ = this.conversionsSubject.asObservable();
 
