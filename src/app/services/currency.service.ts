@@ -27,7 +27,7 @@ export interface ConversionResponse {
   providedIn: 'root'
 })
 export class CurrencyService {
-  private apiUrl = 'http://localhost:3001/api';
+  private apiUrl = 'https://replit.com/@abdulrafaydevel/TA-Solutions-Backend/api';
 
   constructor(private http: HttpClient) { }
 
