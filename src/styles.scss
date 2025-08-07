@@ -1,0 +1,186 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Mobile-first responsive design */
+.container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Custom styles for currency converter */
+.currency-converter {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px 0;
+}
+
+.converter-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.converter-title {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.currency-form {
+  margin-bottom: 30px;
+}
+
+.currency-input-group {
+  margin-bottom: 20px;
+}
+
+.currency-select {
+  width: 100%;
+}
+
+.convert-button {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.convert-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.convert-button:disabled {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.result-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.result-details {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.history-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.history-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-amount {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.history-details {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.history-time {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #c62828;
+}
+
+.success-message {
+  background: #e8f5e8;
+  color: #2e7d32;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #2e7d32;
+}
+
+/* Mobile optimizations */
+@media (max-width: 576px) {
+  .converter-card {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .result-amount {
+    font-size: 2rem;
+  }
+  
+  .converter-title {
+    font-size: 1.5rem;
+  }
+}

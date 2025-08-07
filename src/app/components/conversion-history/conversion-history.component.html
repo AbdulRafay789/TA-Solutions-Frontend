@@ -1,0 +1,87 @@
+<div class="conversion-history-container">
+  <!-- Header Section -->
+  <div class="history-header">
+    <div class="header-content">
+      <h2 class="section-title">
+        <mat-icon class="title-icon">history</mat-icon>
+        Conversion History
+      </h2>
+      <p class="section-subtitle">Track all your currency conversions with detailed timestamps</p>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="warn" (click)="clearHistory()" 
+              [disabled]="conversions.length === 0 || isLoading" class="clear-button">
+        <mat-icon>clear_all</mat-icon>
+        Clear History
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading Section -->
+  <div *ngIf="isLoading" class="loading-section">
+    <div class="loading-content">
+      <mat-spinner diameter="60"></mat-spinner>
+      <h3 class="loading-title">Loading History</h3>
+      <p class="loading-subtitle">Fetching your conversion history...</p>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && conversions.length === 0" class="empty-state">
+    <div class="empty-content">
+      <mat-icon class="empty-icon">history</mat-icon>
+      <h3 class="empty-title">No Conversion History</h3>
+      <p class="empty-description">Your conversion history will appear here after you make your first conversion.</p>
+      <div class="empty-action">
+        <mat-icon>currency_exchange</mat-icon>
+        <span>Start by converting some currencies!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion History List -->
+  <div *ngIf="!isLoading && conversions.length > 0" class="history-content">
+    <div class="history-stats">
+      <div class="stat-card">
+        <mat-icon class="stat-icon">trending_up</mat-icon>
+        <div class="stat-content">
+          <span class="stat-value">{{ conversions.length }}</span>
+          <span class="stat-label">Total Conversions</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <mat-icon class="stat-icon">schedule</mat-icon>
+        <div class="stat-content">
+          <span class="stat-value">{{ getLatestConversionDate() }}</span>
+          <span class="stat-label">Latest Conversion</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="conversion-list">
+      <div class="history-card" *ngFor="let conversion of conversions; trackBy: trackByConversion">
+        <div class="conversion-main">
+          <div class="conversion-amount">
+            <span class="from-amount">{{ formatAmount(conversion.amount) }} {{ conversion.from }}</span>
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+            <span class="to-amount">{{ formatAmount(conversion.result) }} {{ conversion.to }}</span>
+          </div>
+          
+          <div class="conversion-details">
+            <div class="rate-info">
+              <mat-icon class="rate-icon">currency_exchange</mat-icon>
+              <span>1 {{ conversion.from }} = {{ conversion.rate | number:'1.6' }} {{ conversion.to }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="conversion-meta">
+          <div class="timestamp">
+            <mat-icon class="time-icon">schedule</mat-icon>
+            <span class="time-text">{{ formatDate(conversion.timestamp) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

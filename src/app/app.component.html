@@ -1,0 +1,32 @@
+<div class="app-container">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-title">
+        <mat-icon class="header-icon">currency_exchange</mat-icon>
+        <h1>{{ title }}</h1>
+      </div>
+      <div class="header-subtitle">
+        Real-time currency conversion with live exchange rates
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-wrapper">
+      <mat-tab-group class="full-height-tabs" animationDuration="300ms">
+        <mat-tab label="Convert Currency" class="convert-tab">
+          <div class="tab-content">
+            <app-currency-converter></app-currency-converter>
+          </div>
+        </mat-tab>
+        <mat-tab label="Conversion History" class="history-tab">
+          <div class="tab-content">
+            <app-conversion-history></app-conversion-history>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </main>
+</div>

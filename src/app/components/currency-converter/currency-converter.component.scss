@@ -1,0 +1,505 @@
+.currency-converter-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-y: auto;
+}
+
+// Loading section
+.loading-section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 16px;
+}
+
+.loading-content {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-title {
+  color: #333;
+  font-weight: 600;
+  margin: 20px 0 8px 0;
+  font-size: 1.5rem;
+}
+
+.loading-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+// Converter content
+.converter-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+  overflow-y: auto;
+}
+
+// Header section
+.converter-header {
+  text-align: center;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.section-title {
+  color: #333;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 1.75rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #667eea;
+}
+
+.section-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+// Main converter section
+.converter-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+}
+
+.converter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+// Currency cards section
+.currency-cards {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.currency-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+  }
+}
+
+.from-card::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.to-card::before {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #667eea;
+}
+
+.to-card .card-icon {
+  color: #f5576c;
+}
+
+.card-title {
+  color: #333;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.currency-select {
+  width: 100%;
+}
+
+.currency-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.currency-code {
+  font-weight: 600;
+  color: #333;
+  min-width: 50px;
+}
+
+.currency-name {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+// Swap section
+.swap-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swap-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    transform: scale(1.05) rotate(180deg);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+  }
+
+  &:disabled {
+    background: #ccc;
+    box-shadow: none;
+  }
+}
+
+// Amount section
+.amount-section {
+  display: flex;
+  justify-content: center;
+}
+
+.amount-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  max-width: 350px;
+  width: 100%;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  }
+}
+
+.amount-input {
+  width: 100%;
+}
+
+// Convert section
+.convert-section {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  flex-shrink: 0;
+}
+
+.convert-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  &:disabled {
+    background: #ccc;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+.button-spinner {
+  color: white;
+}
+
+.button-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.button-text {
+  font-weight: 600;
+}
+
+// Result section
+.result-section {
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(180deg); }
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.result-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #4CAF50;
+}
+
+.result-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.result-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-main {
+  text-align: center;
+}
+
+.result-amount {
+  margin-bottom: 12px;
+}
+
+.amount-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.amount-currency {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 8px;
+}
+
+.result-equation {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.result-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.detail-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 100px;
+}
+
+.detail-value {
+  color: white;
+  font-weight: 500;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .currency-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .swap-section {
+    order: -1;
+    margin: 12px 0;
+  }
+
+  .swap-button {
+    transform: rotate(90deg);
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .title-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .currency-card,
+  .amount-card {
+    padding: 16px;
+  }
+
+  .result-card {
+    padding: 20px;
+  }
+
+  .amount-value {
+    font-size: 2rem;
+  }
+
+  .amount-currency {
+    font-size: 1.25rem;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .detail-label {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .converter-content {
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .title-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .currency-card,
+  .amount-card {
+    padding: 14px;
+  }
+
+  .result-card {
+    padding: 16px;
+  }
+
+  .amount-value {
+    font-size: 1.75rem;
+  }
+
+  .amount-currency {
+    font-size: 1.1rem;
+  }
+}

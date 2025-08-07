@@ -1,0 +1,151 @@
+<div class="currency-converter-container">
+  <!-- Loading currencies -->
+  <div *ngIf="isLoadingCurrencies" class="loading-section">
+    <div class="loading-content">
+      <mat-spinner diameter="60"></mat-spinner>
+      <h3 class="loading-title">Loading Currencies</h3>
+      <p class="loading-subtitle">Fetching latest currency data...</p>
+    </div>
+  </div>
+
+  <!-- Currency converter form -->
+  <div *ngIf="!isLoadingCurrencies" class="converter-content">
+    <!-- Header Section -->
+    <div class="converter-header">
+      <h2 class="section-title">
+        <mat-icon class="title-icon">currency_exchange</mat-icon>
+        Currency Converter
+      </h2>
+      <p class="section-subtitle">Convert between any supported currencies with real-time exchange rates</p>
+    </div>
+
+    <!-- Main Converter Form -->
+    <div class="converter-main">
+      <form [formGroup]="converterForm" (ngSubmit)="convertCurrency()" class="converter-form">
+        <!-- Currency Selection Cards -->
+        <div class="currency-cards">
+          <!-- From Currency Card -->
+          <div class="currency-card from-card">
+            <div class="card-header">
+              <mat-icon class="card-icon">flight_takeoff</mat-icon>
+              <h3 class="card-title">From Currency</h3>
+            </div>
+            <mat-form-field appearance="outline" class="currency-select">
+              <mat-label>Select Currency</mat-label>
+              <mat-select formControlName="fromCurrency" required>
+                <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+                  <div class="currency-option">
+                    <span class="currency-code">{{ currency.code }}</span>
+                    <span class="currency-name"> - {{ currency.name }}</span>
+                  </div>
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="converterForm.get('fromCurrency')?.hasError('required')">
+                Please select a currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Swap Button -->
+          <div class="swap-section">
+            <button type="button" mat-fab color="primary" (click)="swapCurrencies()" 
+                    [disabled]="!converterForm.get('fromCurrency')?.value || !converterForm.get('toCurrency')?.value"
+                    class="swap-button">
+              <mat-icon>swap_horiz</mat-icon>
+            </button>
+          </div>
+
+          <!-- To Currency Card -->
+          <div class="currency-card to-card">
+            <div class="card-header">
+              <mat-icon class="card-icon">flight_land</mat-icon>
+              <h3 class="card-title">To Currency</h3>
+            </div>
+            <mat-form-field appearance="outline" class="currency-select">
+              <mat-label>Select Currency</mat-label>
+              <mat-select formControlName="toCurrency" required>
+                <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+                  <div class="currency-option">
+                    <span class="currency-code">{{ currency.code }}</span>
+                    <span class="currency-name"> - {{ currency.name }}</span>
+                  </div>
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="converterForm.get('toCurrency')?.hasError('required')">
+                Please select a currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Amount Input Section -->
+        <div class="amount-section">
+          <div class="amount-card">
+            <div class="card-header">
+              <mat-icon class="card-icon">payments</mat-icon>
+              <h3 class="card-title">Amount</h3>
+            </div>
+            <mat-form-field appearance="outline" class="amount-input">
+              <mat-label>Enter Amount</mat-label>
+              <input matInput type="number" formControlName="amount" placeholder="0.00" min="0.01" step="0.01">
+              <mat-icon matSuffix>attach_money</mat-icon>
+              <mat-error *ngIf="converterForm.get('amount')?.hasError('required')">
+                Amount is required
+              </mat-error>
+              <mat-error *ngIf="converterForm.get('amount')?.hasError('min')">
+                Amount must be greater than 0
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Convert Button -->
+        <div class="convert-section">
+          <button mat-raised-button color="primary" type="submit" 
+                  [disabled]="converterForm.invalid || isLoading" 
+                  class="convert-button">
+            <mat-spinner diameter="24" *ngIf="isLoading" class="button-spinner"></mat-spinner>
+            <mat-icon *ngIf="!isLoading" class="button-icon">currency_exchange</mat-icon>
+            <span class="button-text">{{ isLoading ? 'Converting...' : 'Convert Currency' }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Conversion Result -->
+    <div *ngIf="conversionResult && !isLoading" class="result-section">
+      <div class="result-card">
+        <div class="result-header">
+          <mat-icon class="result-icon">check_circle</mat-icon>
+          <h3 class="result-title">Conversion Result</h3>
+        </div>
+        
+        <div class="result-content">
+          <div class="result-main">
+            <div class="result-amount">
+              <span class="amount-value">{{ conversionResult.result | number:'1.2-6' }}</span>
+              <span class="amount-currency">{{ conversionResult.to }}</span>
+            </div>
+            <div class="result-equation">
+              {{ conversionResult.amount | number:'1.2-2' }} {{ conversionResult.from }} = 
+              {{ conversionResult.result | number:'1.2-6' }} {{ conversionResult.to }}
+            </div>
+          </div>
+          
+          <div class="result-details">
+            <div class="detail-item">
+              <mat-icon class="detail-icon">trending_up</mat-icon>
+              <span class="detail-label">Exchange Rate:</span>
+              <span class="detail-value">1 {{ conversionResult.from }} = {{ conversionResult.rate | number:'1.6' }} {{ conversionResult.to }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon class="detail-icon">schedule</mat-icon>
+              <span class="detail-label">Last Updated:</span>
+              <span class="detail-value">{{ conversionResult.timestamp | date:'medium' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
